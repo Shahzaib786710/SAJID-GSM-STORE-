@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAJID GAM STORE</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#07111f;color:#fff;line-height:1.6}
+header{background:#0c1d32;padding:22px 15px;text-align:center;border-bottom:2px solid #00d9ff}
+header h1{color:#00d9ff;font-size:28px}
+header p{color:#b7c8da}
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;padding:15px;background:#10243b}
+nav a{color:white;text-decoration:none;font-weight:bold}
+.hero{text-align:center;padding:65px 18px;background:linear-gradient(135deg,#102e50,#07111f)}
+.hero h2{font-size:32px;color:#00d9ff;margin-bottom:10px}
+.hero p{color:#c3d4e8}
+.btn{display:inline-block;background:#00c9ed;color:#00111b;padding:11px 22px;border-radius:7px;text-decoration:none;font-weight:bold;margin-top:20px}
+section{padding:38px 17px;max-width:1100px;margin:auto}
+.heading{text-align:center;color:#00d9ff;font-size:25px;margin-bottom:24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:17px}
+.card{background:#10243b;padding:22px;border:1px solid #1b4967;border-radius:12px;text-align:center}
+.card h3{color:#00d9ff;margin-bottom:9px}
+.card p{color:#c2d1df}
+.card a{color:#00d9ff}
+form{max-width:550px;margin:auto;background:#10243b;padding:22px;border-radius:12px}
+input,select,textarea{width:100%;padding:13px;margin:8px 0;border:1px solid #31516e;background:#07111f;color:white;border-radius:6px}
+button{background:#00c9ed;color:#00111b;padding:13px;border:0;border-radius:6px;font-weight:bold;width:100%;cursor:pointer}
+.contact{text-align:center;background:#10243b;padding:25px;border-radius:12px}
+footer{text-align:center;background:#050c15;padding:22px;color:#9bb0c5}
+</style>
+</head>
+<body>
+
+<header>
+<h1>SAJID GAM STORE</h1>
+<p>ALL IN ONE SOFTWARE HUB</p>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#tools">Tools</a>
+<a href="#courses">Courses</a>
+<a href="#license">License</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<div class="hero" id="home">
+<h2>WELCOME TO SAJID GAM STORE</h2>
+<p>Your trusted mobile software tools and learning hub.</p>
+<a class="btn" href="#tools">Explore Services</a>
+</div>
+
+<section id="tools">
+<h2 class="heading">OUR TOOLS & SERVICES</h2>
+<div class="grid">
+<div class="card">
+<h3>FRP MASTER PRO</h3>
+<p>Mobile software solutions and tools.</p>
+<a href="#license">Request Access</a>
+</div>
+<div class="card">
+<h3>SOFTWARE TOOLS</h3>
+<p>Professional software tools and services.</p>
+<a href="#license">Get Details</a>
+</div>
+<div class="card">
+<h3>FILES & DRIVERS</h3>
+<p>Useful files, drivers and resources.</p>
+<a href="#contact">Contact Us</a>
+</div>
+<div class="card">
+<h3>TOOLS RENT</h3>
+<p>Ask about available tool rental plans.</p>
+<a href="#license">Request Login</a>
+</div>
+</div>
+</section>
+
+<section id="courses">
+<h2 class="heading">LEARNING ACADEMY</h2>
+<div class="grid">
+<div class="card">
+<h3>Mobile Software Course</h3>
+<p>Learn mobile software basics step by step.</p>
+</div>
+<div class="card">
+<h3>Technical Training</h3>
+<p>Improve your technical skills with practice.</p>
+</div>
+<div class="card">
+<h3>Beginner Guide</h3>
+<p>Start learning from zero level.</p>
+</div>
+</div>
+</section>
+
+<section id="license">
+<h2 class="heading">REQUEST TOOL ACCESS</h2>
+<form id="requestForm">
+<input id="name" placeholder="Your Name" required>
+<input id="phone" placeholder="WhatsApp Number" required>
+<select id="product" required>
+<option value="">Select Product</option>
+<option>FRP MASTER PRO</option>
+<option>Software Tools</option>
+<option>Tools Rent</option>
+</select>
+<select id="plan">
+<option>1 Hour</option>
+<option>1 Day</option>
+<option>7 Days</option>
+<option>30 Days</option>
+</select>
+<textarea id="details" placeholder="Device ID / Message"></textarea>
+<button type="submit">SEND REQUEST ON WHATSAPP</button>
+</form>
+</section>
+
+<section id="contact">
+<h2 class="heading">CONTACT US</h2>
+<div class="contact">
+<h3>SAJID GAM STORE</h3>
+<p>ALL IN ONE SOFTWARE HUB</p>
+<p>For tools, courses and support, contact us.</p>
+<a class="btn" href="https://wa.me/" target="_blank">WhatsApp Contact</a>
+</div>
+</section>
+
+<footer>
+<p>© 2026 SAJID GAM STORE</p>
+<p>ALL RIGHTS RESERVED</p>
+</footer>
+
+<script>
+document.getElementById("requestForm").addEventListener("submit",function(e){
+e.preventDefault();
+const name=document.getElementById("name").value;
+const phone=document.getElementById("phone").value;
+const product=document.getElementById("product").value;
+const plan=document.getElementById("plan").value;
+const details=document.getElementById("details").value;
+const message=`Hello SAJID GAM STORE!
+Name: ${name}
+WhatsApp: ${phone}
+Product: ${product}
+Plan: ${plan}
+Details: ${details}`;
+window.open("https://wa.me/?text="+encodeURIComponent(message),"_blank");
+});
+</script>
+</body>
+</html>
