@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAJID GAM STORE</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#07111f;color:#fff}
+header{padding:20px;background:#101e32;border-bottom:1px solid #23415e;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:22px;font-weight:bold;color:#22d3ee}
+.logo span{color:white}
+button{padding:12px 17px;background:#087ee8;color:white;border:0;border-radius:8px;font-weight:bold;cursor:pointer}
+.hero{text-align:center;padding:65px 18px;background:linear-gradient(140deg,#102b4d,#07111f)}
+.hero h1{font-size:36px;margin-bottom:15px}
+.hero h1 span{color:#22d3ee}
+.hero p{color:#b5c7dd;line-height:1.7}
+section{padding:28px 18px;max-width:1100px;margin:auto}
+h2{margin-bottom:20px;color:#22d3ee}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.card{background:#112139;border:1px solid #294360;border-radius:13px;padding:20px}
+.card h3{margin:10px 0}
+.card p{color:#aabbd0;line-height:1.6;font-size:14px}
+.card button{margin-top:15px}
+input,select,textarea{width:100%;padding:13px;margin:7px 0;background:#071525;border:1px solid #31506c;border-radius:8px;color:white}
+textarea{min-height:80px}
+form{max-width:550px}
+nav{display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px;background:#0b192b}
+nav button{background:#18314d}
+footer{text-align:center;padding:30px;background:#101e32;color:#aabbd0;margin-top:35px}
+.admin{border:1px solid #22d3ee}
+.hidden{display:none}
+a{color:#22d3ee}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">SAJID <span>GAM STORE</span></div>
+<button onclick="document.getElementById('admin').classList.toggle('hidden')">Admin</button>
+</header>
+
+<div class="hero">
+<h1>WELCOME TO <span>SAJID GAM STORE</span></h1>
+<p>ALL IN ONE MOBILE SOFTWARE HUB</p>
+<p>Tools • Courses • Files • Licenses • Software Services</p>
+<br>
+<button onclick="document.getElementById('tools').scrollIntoView()">Explore Store</button>
+</div>
+
+<nav>
+<button onclick="location.href='#tools'">Tools</button>
+<button onclick="location.href='#courses'">Courses</button>
+<button onclick="location.href='#license'">License</button>
+<button onclick="location.href='#contact'">Contact</button>
+</nav>
+
+<section id="tools">
+<h2>🛠 TOOLS & SOFTWARE</h2>
+<div class="grid" id="toolList">
+<div class="card"><h3>FRP MASTER PRO</h3><p>Mobile software tools and services.</p><button onclick="request('FRP MASTER PRO')">Get Details</button></div>
+<div class="card"><h3>Software Tools</h3><p>Tools rental and activation services.</p><button onclick="request('Software Tools')">Get Details</button></div>
+<div class="card"><h3>Files & Drivers</h3><p>Useful software files and updates.</p><button onclick="request('Files & Drivers')">Get Details</button></div>
+</div>
+</section>
+
+<section id="courses">
+<h2>🎓 COURSES ACADEMY</h2>
+<div class="grid" id="courseList">
+<div class="card"><h3>Mobile Software Course</h3><p>Learn mobile software fundamentals.</p><button onclick="request('Mobile Software Course')">Course Details</button></div>
+<div class="card"><h3>Computer Basics</h3><p>Learn essential computer skills.</p><button onclick="request('Computer Basics')">Course Details</button></div>
+</div>
+</section>
+
+<section id="license">
+<h2>🔑 LICENSE REQUEST</h2>
+<div class="card">
+<p>Submit your tool license activation request.</p>
+<form onsubmit="sendLicense(event)">
+<input id="customer" placeholder="Your Name" required>
+<input id="phone" placeholder="WhatsApp Number" required>
+<select id="product">
+<option>FRP MASTER PRO</option>
+<option>Software Tool</option>
+<option>Other Tool</option>
+</select>
+<select id="plan">
+<option>1 Day</option>
+<option>7 Days</option>
+<option>30 Days</option>
+<option>1 Year</option>
+</select>
+<textarea id="details" placeholder="Device ID / Other Details"></textarea>
+<button type="submit">Submit Request</button>
+</form>
+</div>
+</section>
+
+<section id="contact">
+<h2>📞 CONTACT US</h2>
+<div class="card">
+<h3>SAJID GAM STORE</h3>
+<p>For tools, courses, licenses and support.</p>
+<p>WhatsApp: Add your business number here.</p>
+</div>
+</section>
+
+<section id="admin" class="hidden">
+<h2>⚙ ADMIN PANEL</h2>
+<div class="card admin">
+<h3>Add New Tool</h3>
+<input id="newName" placeholder="Tool Name">
+<input id="newDesc" placeholder="Description">
+<button onclick="addTool()">Add Tool</button>
+<hr style="margin:20px 0;border-color:#31506c">
+<h3>Customer License Requests</h3>
+<div id="requests">No requests yet.</div>
+</div>
+</section>
+
+<footer>
+<h3>SAJID GAM STORE</h3>
+<p>ALL IN ONE SOFTWARE HUB</p>
+<p>© 2026 All Rights Reserved</p>
+</footer>
+
+<script>
+function request(name){
+document.getElementById('product').value=
+document.querySelector('#product option') &&
+[...document.querySelectorAll('#product option')].some(o=>o.value===name)
+?name:'Other Tool';
+document.getElementById('license').scrollIntoView();
+}
+function sendLicense(e){
+e.preventDefault();
+let data={
+name:document.getElementById('customer').value,
+phone:document.getElementById('phone').value,
+product:document.getElementById('product').value,
+plan:document.getElementById('plan').value,
+details:document.getElementById('details').value
+};
+let old=JSON.parse(localStorage.getItem('sajidRequests')||'[]');
+old.push(data);
+localStorage.setItem('sajidRequests',JSON.stringify(old));
+alert('Request saved in this browser!');
+e.target.reset();
+}
+function addTool(){
+let n=document.getElementById('newName').value;
+let d=document.getElementById('newDesc').value;
+if(!n)return alert('Enter tool name');
+let tools=JSON.parse(localStorage.getItem('sajidTools')||'[]');
+tools.push({n,d});
+localStorage.setItem('sajidTools',JSON.stringify(tools));
+showTools();
+alert('Tool added!');
+}
+function showTools(){
+let tools=JSON.parse(localStorage.getItem('sajidTools')||'[]');
+tools.forEach(t=>{
+let card=document.createElement('div');
+card.className='card';
+let h=document.createElement('h3');h.textContent=t.n;
+let p=document.createElement('p');p.textContent=t.d;
+card.append(h,p);
+document.getElementById('toolList').appendChild(card);
+});
+let requests=JSON.parse(localStorage.getItem('sajidRequests')||'[]');
+document.getElementById('requests').textContent=
+requests.length?requests.map(r=>r.name+' - '+r.product+' - '+r.plan).join(' | '):'No requests yet.';
+}
+showTools();
+</script>
+</body>
+</html>
