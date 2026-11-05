@@ -150,5 +150,83 @@ Details: ${details}`;
 window.open("https://wa.me/?text="+encodeURIComponent(message),"_blank");
 });
 </script>
+<style>
+.admin-box{max-width:700px;margin:30px auto;padding:20px;background:#10243b;border:1px solid #00d9ff;border-radius:12px}
+.admin-box h2{color:#00d9ff;text-align:center;margin-bottom:15px}
+.admin-box input{width:100%;padding:12px;margin:7px 0;background:#07111f;color:white;border:1px solid #31516e;border-radius:6px}
+.admin-box button{margin:8px 0}
+.tool-item{padding:12px;margin:8px 0;background:#07111f;border-radius:7px}
+.tool-item button{width:auto;padding:7px 12px;background:#e04444;color:white}
+</style>
+
+<section class="admin-box" id="admin">
+<h2>⚙️ SAJID GAM STORE ADMIN</h2>
+<p style="text-align:center;color:#bbb">Local Demo Dashboard</p>
+
+<input id="toolName" placeholder="Tool Name">
+<input id="toolPrice" placeholder="Tool Price">
+<input id="toolDesc" placeholder="Tool Description">
+
+<button onclick="addTool()">+ ADD NEW TOOL</button>
+
+<h3 style="color:#00d9ff;margin-top:20px">MY TOOLS</h3>
+<div id="toolList"></div>
+</section>
+
+<script>
+let myTools=JSON.parse(localStorage.getItem("sajidTools")||"[]");
+
+function showTools(){
+const list=document.getElementById("toolList");
+list.innerHTML="";
+
+myTools.forEach((tool,index)=>{
+list.innerHTML+=`
+<div class="tool-item">
+<strong>${escapeText(tool.name)}</strong>
+<p>Price: ${escapeText(tool.price)}</p>
+<p>${escapeText(tool.desc)}</p>
+<button onclick="deleteTool(${index})">Delete</button>
+</div>`;
+});
+}
+
+function escapeText(value){
+const div=document.createElement("div");
+div.textContent=value;
+return div.innerHTML;
+}
+
+function addTool(){
+const name=document.getElementById("toolName").value.trim();
+const price=document.getElementById("toolPrice").value.trim();
+const desc=document.getElementById("toolDesc").value.trim();
+
+if(!name||!price){
+alert("Tool name and price required!");
+return;
+}
+
+myTools.push({name,price,desc});
+localStorage.setItem("sajidTools",JSON.stringify(myTools));
+
+document.getElementById("toolName").value="";
+document.getElementById("toolPrice").value="";
+document.getElementById("toolDesc").value="";
+
+showTools();
+alert("Tool added successfully!");
+}
+
+function deleteTool(index){
+if(confirm("Delete this tool?")){
+myTools.splice(index,1);
+localStorage.setItem("sajidTools",JSON.stringify(myTools));
+showTools();
+}
+}
+
+showTools();
+</script>
 </body>
 </html>
